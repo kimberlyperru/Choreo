@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Main app theme -->
+    <style name="Theme.Choreo" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="android:windowBackground">@color/indigo_dark</item>
+        <item name="android:statusBarColor">@color/indigo_dark</item>
+        <item name="android:navigationBarColor">@color/indigo_dark</item>
+    </style>
+
+    <!-- Splash screen theme (same look, separate entry) -->
+    <style name="Theme.Choreo.Splash" parent="Theme.MaterialComponents.NoActionBar">
+        <item name="android:windowBackground">@color/indigo_dark</item>
+        <item name="android:statusBarColor">@color/indigo_dark</item>
+        <item name="android:navigationBarColor">@color/indigo_dark</item>
+    </style>
+
+</resources>
