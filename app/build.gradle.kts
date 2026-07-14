@@ -19,9 +19,11 @@ android {
 
     buildTypes {
         release {
-            optimization {
-                enable = false
-            }
+            isMinifyEnabled = false
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
         }
     }
     compileOptions {
@@ -30,6 +32,13 @@ android {
     }
     buildFeatures {
         compose = true
+    }
+
+    packaging {
+        resources {
+            pickFirsts.add("META-INF/INDEX.LIST")
+            pickFirsts.add("META-INF/io.netty.versions.properties")
+        }
     }
 }
 
@@ -54,15 +63,23 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.test.manifest)
     debugImplementation(libs.androidx.compose.ui.tooling)
     // Navigation between screens
-    implementation ("androidx.navigation:navigation-fragment-ktx:2.7.7")
-    implementation("androidx.navigation:navigation-ui-ktx:2.7.7")
+    implementation(libs.androidx.navigation.fragment.ktx)
+    implementation(libs.androidx.navigation.ui.ktx)
 // ViewPager2 for onboarding slides
-    implementation("androidx.viewpager2:viewpager2:1.0.0")
+    implementation(libs.androidx.viewpager2)
 // RecyclerView for song lists
-    implementation("androidx.recyclerview:recyclerview:1.3.2")
+    implementation(libs.androidx.recyclerview)
 // Rounded image corners (for album art later)
-    implementation("com.github.bumptech.glide:glide:4.16.0")
+    implementation(libs.glide)
 // Media playback (for audio reference)
-    implementation("androidx.media3:media3-exoplayer:1.2.1")
+    implementation(libs.androidx.media3.exoplayer)
 
-    implementation("com.google.android.material:material:1.11.0")}
+    // Pitch detection
+    implementation("be.tarsos.dsp:core:2.5")
+    implementation("be.tarsos.dsp:jvm:2.5")
+// Sheet music rendering
+    implementation(libs.alphatab)
+
+
+
+}

@@ -44,7 +44,7 @@
         android:background="@drawable/bg_logo_circle"
         android:src="@android:drawable/ic_menu_myplaces"
         android:padding="8dp"
-        android:colorFilter="@color/indigo_light"
+        app:tint="@color/indigo_light"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
@@ -73,7 +73,7 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:src="@android:drawable/ic_menu_search"
-                android:colorFilter="@color/text_muted"/>
+                app:tint="@color/text_muted"/>
 
             <EditText
                 android:id="@+id/etSearch"
@@ -81,7 +81,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginStart="10dp"
                 android:hint="Search songs, e.g. Amazing Grace"
-                android:hintTextColor="@color/text_muted"
+                android:textColorHint="@color/text_muted"
                 android:textColor="@color/white"
                 android:textSize="14sp"
                 android:background="@null"

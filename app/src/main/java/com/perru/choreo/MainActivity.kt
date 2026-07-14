@@ -1,14 +1,14 @@
 package com.perru.choreo
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.widget.EditText
-import android.widget.Toast
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.perru.choreo.R
 import java.util.Calendar
 
 class MainActivity : AppCompatActivity() {
@@ -19,7 +19,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var songAdapter: SongAdapter
     private lateinit var featuredAdapter: SongAdapter
 
-    // Public domain song library
     private val allSongs = listOf(
         Song(1, "Amazing Grace", "John Newton", listOf("Piano", "Guitar"), "Beginner", "🎵", true),
         Song(2, "Ode to Joy", "Beethoven", listOf("Piano", "Violin"), "Beginner", "🎶", true),
@@ -50,16 +49,25 @@ class MainActivity : AppCompatActivity() {
             hour < 17 -> "Good afternoon 👋"
             else      -> "Good evening 👋"
         }
-        findViewById<android.widget.TextView>(R.id.tvGreeting).text = greeting
+        findViewById<TextView>(R.id.tvGreeting).text = greeting
+    }
+
+    private fun openSong(song: Song) {
+        val intent = Intent(this, SongDetailActivity::class.java).apply {
+            putExtra("song_id", song.id)
+            putExtra("song_title", song.title)
+            putExtra("song_composer", song.composer)
+            putExtra("song_emoji", song.emoji)
+            putExtra("song_difficulty", song.difficulty)
+            putStringArrayListExtra("song_instruments", ArrayList(song.instruments))
+        }
+        startActivity(intent)
     }
 
     private fun setupFeatured() {
         rvFeatured = findViewById(R.id.rvFeatured)
         val featured = allSongs.filter { it.isFeatured }
-        featuredAdapter = SongAdapter(featured) { song ->
-            Toast.makeText(this, "Opening ${song.title}…", Toast.LENGTH_SHORT).show()
-            // TODO: navigate to SongDetailActivity
-        }
+        featuredAdapter = SongAdapter(featured) { song -> openSong(song) }
         rvFeatured.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         rvFeatured.adapter = featuredAdapter
@@ -67,10 +75,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupSongList() {
         rvSongs = findViewById(R.id.rvSongs)
-        songAdapter = SongAdapter(allSongs) { song ->
-            Toast.makeText(this, "Opening ${song.title}…", Toast.LENGTH_SHORT).show()
-            // TODO: navigate to SongDetailActivity
-        }
+        songAdapter = SongAdapter(allSongs) { song -> openSong(song) }
         rvSongs.layoutManager = LinearLayoutManager(this)
         rvSongs.adapter = songAdapter
     }

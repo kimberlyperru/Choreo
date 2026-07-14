@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
 
     <application
         android:allowBackup="true"
@@ -15,8 +16,8 @@
         <!-- Splash is the entry point -->
         <activity
             android:name=".SplashActivity"
-            android:theme="@style/Theme.Choreo.Splash"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/Theme.Choreo.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -30,11 +31,22 @@
             android:name=".OnboardingActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
-
-        <activity android:name=".MainActivity"
-            android:theme="@style/Theme.Choreo"/>
-
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/Theme.Choreo" />
+        <activity
+            android:name=".SongDetailActivity"
+            android:theme="@style/Theme.Choreo" />
+        <activity
+            android:name=".PractiseActivity"
+            android:theme="@style/Theme.Choreo" />
+        <activity android:name=".PracticeActivity"
+            android:theme="@style/Theme.Choreo"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".PracticeActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
     </application>
-
 
 </manifest>
