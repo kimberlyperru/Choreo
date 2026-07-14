@@ -1,19 +1,18 @@
 plugins {
     alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.kotlin.android)
 }
 
 android {
     namespace = "com.perru.choreo"
-    compileSdk = 37
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.perru.choreo"
-        minSdk = 23
+        minSdk = 26
         targetSdk = 36
         versionCode = 1
         versionName = "1.0"
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -26,60 +25,55 @@ android {
             )
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
+
+    kotlinOptions {
+        jvmTarget = "11"
+    }
+
     buildFeatures {
-        compose = true
+        viewBinding = true
     }
 
     packaging {
         resources {
-            pickFirsts.add("META-INF/INDEX.LIST")
-            pickFirsts.add("META-INF/io.netty.versions.properties")
+            pickFirsts += listOf(
+                "META-INF/INDEX.LIST",
+                "META-INF/io.netty.versions.properties"
+            )
         }
     }
 }
 
 dependencies {
-    implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.androidx.activity.compose)
-    implementation(libs.androidx.activity.ktx)
-    implementation(libs.androidx.appcompat)
-    implementation(libs.androidx.compose.material3)
-    implementation(libs.androidx.compose.ui)
-    implementation(libs.androidx.compose.ui.graphics)
-    implementation(libs.androidx.compose.ui.tooling.preview)
-    implementation(libs.androidx.constraintlayout)
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.lifecycle.runtime.ktx)
-    implementation(libs.material)
-    testImplementation(libs.junit)
-    androidTestImplementation(platform(libs.androidx.compose.bom))
-    androidTestImplementation(libs.androidx.compose.ui.test.junit4)
-    androidTestImplementation(libs.androidx.espresso.core)
-    androidTestImplementation(libs.androidx.junit)
-    debugImplementation(libs.androidx.compose.ui.test.manifest)
-    debugImplementation(libs.androidx.compose.ui.tooling)
-    // Navigation between screens
-    implementation(libs.androidx.navigation.fragment.ktx)
-    implementation(libs.androidx.navigation.ui.ktx)
-// ViewPager2 for onboarding slides
-    implementation(libs.androidx.viewpager2)
-// RecyclerView for song lists
-    implementation(libs.androidx.recyclerview)
-// Rounded image corners (for album art later)
-    implementation(libs.glide)
-// Media playback (for audio reference)
-    implementation(libs.androidx.media3.exoplayer)
+    implementation("androidx.core:core-ktx:1.12.0")
+    implementation("androidx.appcompat:appcompat:1.6.1")
+    implementation("com.google.android.material:material:1.11.0")
+    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
+    implementation("androidx.activity:activity-ktx:1.9.0")
+
+    // Navigation
+    implementation("androidx.navigation:navigation-fragment-ktx:2.7.7")
+    implementation("androidx.navigation:navigation-ui-ktx:2.7.7")
+
+    // UI components
+    implementation("androidx.viewpager2:viewpager2:1.0.0")
+    implementation("androidx.recyclerview:recyclerview:1.3.2")
+    implementation("com.github.bumptech.glide:glide:4.16.0")
+
+    // Media
+    implementation("androidx.media3:media3-exoplayer:1.2.1")
 
     // Pitch detection
-    implementation("be.tarsos.dsp:core:2.5")
-    implementation("be.tarsos.dsp:jvm:2.5")
-// Sheet music rendering
-    implementation(libs.alphatab)
+    implementation("com.github.JorenSix:TarsosDSP:master-SNAPSHOT")
 
-
-
+    // Testing
+    testImplementation("junit:junit:4.13.2")
+    androidTestImplementation("androidx.test.ext:junit:1.1.5")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 }

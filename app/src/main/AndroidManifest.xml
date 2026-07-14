@@ -38,15 +38,10 @@
             android:name=".SongDetailActivity"
             android:theme="@style/Theme.Choreo" />
         <activity
-            android:name=".PractiseActivity"
-            android:theme="@style/Theme.Choreo" />
-        <activity android:name=".PracticeActivity"
-            android:theme="@style/Theme.Choreo"
-            android:screenOrientation="portrait"/>
-        <activity
             android:name=".PracticeActivity"
-            android:exported="false"
-            android:windowSoftInputMode="adjustResize" />
+            android:theme="@style/Theme.Choreo"
+            android:screenOrientation="portrait"
+            android:exported="false"/>
     </application>
 
 </manifest>

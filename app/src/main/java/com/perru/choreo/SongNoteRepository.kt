@@ -1,6 +1,5 @@
 package com.perru.choreo
 
-package com.perru.choreo
 
 object SongNoteRepository {
 
